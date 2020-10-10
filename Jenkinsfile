@@ -27,9 +27,11 @@ pipeline {
         stage('Create docker image') { 
             steps { 
 			
+			//need to first register with DockerHub before you can push images to your account
+		
 			   sh 'cd weatherprediction'
-               sh 'docker build -t weatherapp:latest .'
-               sh 'docker push weatherapp:latest'
+               sh 'docker build -t kashyap1729/weatherapp:latest .'
+               sh 'docker push kashyap1729/weatherapp:latest'
             }
         }
     }
@@ -38,10 +40,11 @@ pipeline {
 	stages { 
         stage('Deploy to EC2 and run image') { 
             steps { 
-			
+			 
+			 //Need to login to EC2
                sh 'login to EC2 with credentials'
-               sh 'docker pull weatherapp:latest'
-               sh 'docker run -p 80:8080 --name my-app weatherapp:latest'
+               sh 'docker pull kashyap1729/weatherapp:latest'
+               sh 'docker run -p 80:8080 --name my-app kashyap1729/weatherapp:latest'
                
             }
         }
