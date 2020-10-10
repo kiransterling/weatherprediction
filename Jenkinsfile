@@ -44,7 +44,7 @@ pipeline {
 			 //Need to login to EC2
                sh 'login to EC2 with credentials'
                sh 'docker pull kashyap1729/weatherapp:latest'
-               sh 'docker run -p 80:8080 --name my-app kashyap1729/weatherapp:latest'
+               sh 'docker run -p 80:8080 -d --name my-app kashyap1729/weatherapp:latest'
                
             }
         }
