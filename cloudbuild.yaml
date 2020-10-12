@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/mvn'
-  args: ['clean install']
+  args: ['clean' , 'install']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/weatherapp', '.']
 images: ['gcr.io/$PROJECT_ID/weatherapp']
