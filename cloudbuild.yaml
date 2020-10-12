@@ -1,7 +1,13 @@
 steps:
+# Build the container image
 - name: maven:3.6-jdk-8-slim
   entrypoint: 'mvn'
   args: ['clean' , 'install']
+# Push the container image to Container Registry  
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/weatherapp', '.']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'weatherprediction', '--image', 'gcr.io/$PROJECT_ID/weatherapp', '--region', 'us-central1', '--platform', 'managed']
 images: ['gcr.io/$PROJECT_ID/weatherapp']
